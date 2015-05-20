@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+#if DNXCORE50
+using Environment = Microsoft.Framework.PackageManager.Internal.Environment;
+#endif
 
 namespace NuGet
 {
@@ -15,11 +15,8 @@ namespace NuGet
 
         public CommandLineMachineWideSettings()
         {
-#if DNX451
-            var baseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-#else
-            var baseDirectory = Environment.GetEnvironmentVariable("ProgramData");
-#endif
+            string baseDirectory = NuGetPathUtility.GetMachineWideSettingBaseDirectory();
+
             _settings = new Lazy<IEnumerable<NuGet.Settings>>(
                 () => NuGet.Settings.LoadMachineWideSettings(
                     new PhysicalFileSystem(baseDirectory)));
