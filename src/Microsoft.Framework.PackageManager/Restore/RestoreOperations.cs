@@ -291,7 +291,18 @@ namespace Microsoft.Framework.PackageManager
             // If we found an exact match then use it
             if (nonHttpMatch != null && nonHttpMatch.Library.Version.Equals(libraryRange.VersionRange.MinVersion))
             {
-                return nonHttpMatch;
+                if (nonHttpMatch.Library.Version.IsOriginalStringNormalized())
+                {
+                    return nonHttpMatch;
+                }
+                else
+                {
+                    // For a non-http match, if the OriginalVersion string is not normalized that means name of the folder which contains
+                    // the package is not a normalized string. It will cause trouble for file searching in later stage. By invalidate this 
+                    // match, it ensures the package will be reinstalled under a correct folder. This change ensures a package installed 
+                    // by older version of DNX won't prevent new DNX to install correct package.
+                    nonHttpMatch = null;
+                }
             }
 
             // Otherwise try listed packages on http sources
