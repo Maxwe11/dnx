@@ -49,5 +49,41 @@ namespace Microsoft.Framework.Runtime
         {
             get { return _targetFramework; }
         }
+
+#if DNX451
+        public object GetData(string name)
+        {
+            return AppDomain.CurrentDomain.GetData(name);
+        }
+
+        public void SetData(string name, object value)
+        {
+            AppDomain.CurrentDomain.SetData(name, value);
+        }
+#else
+        // NOTE(anurse): ConcurrentDictionary seems overkill here. This data is rarely used, and a global lock seems safer.
+        private object _lock = new object();
+        private Dictionary<string, object> _appGlobalData = new Dictionary<string, object>();
+        public object GetData(string name)
+        {
+            lock (_lock)
+            {
+                object val;
+                if (_appGlobalData.TryGetValue(name, out val))
+                {
+                    return val;
+                }
+                return null;
+            }
+        }
+
+        public void SetData(string name, object value)
+        {
+            lock (_lock)
+            {
+                _appGlobalData[name] = value;
+            }
+        }
+#endif
     }
 }
