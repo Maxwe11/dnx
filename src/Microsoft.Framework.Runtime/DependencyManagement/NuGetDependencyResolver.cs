@@ -236,10 +236,8 @@ namespace Microsoft.Framework.Runtime
 
             foreach (var dependency in packages)
             {
-                // The version should match and the original version string should be normalized
                 var packageInfo = _repository.FindPackagesById(dependency.Identity.Name)
-                    .FirstOrDefault(p => p.Version == dependency.Identity.Version && 
-                                         p.Version.IsOriginalStringNormalized());
+                    .FirstOrDefault(p => p.Version == dependency.Identity.Version);
 
                 if (packageInfo == null)
                 {

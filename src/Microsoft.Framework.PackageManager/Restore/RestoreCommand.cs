@@ -831,7 +831,7 @@ namespace Microsoft.Framework.PackageManager
             {
                 var library = item.Match.Library;
                 var packageInfo = repository.FindPackagesById(library.Name)
-                    .FirstOrDefault(p => p.Version == library.Version && p.Version.IsOriginalStringNormalized());
+                    .FirstOrDefault(p => p.Version == library.Version);
 
                 if (packageInfo == null)
                 {
