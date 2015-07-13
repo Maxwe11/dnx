@@ -15,20 +15,20 @@ namespace Microsoft.Framework.Runtime
 
         ILibraryExport GetAllExports(string name);
 
-        IEnumerable<ILibraryInformation> GetReferencingLibraries(string name);
+        IEnumerable<Library> GetReferencingLibraries(string name);
 
-        ILibraryInformation GetLibraryInformation(string name);
+        Library GetLibraryInformation(string name);
 
-        IEnumerable<ILibraryInformation> GetLibraries();
+        IEnumerable<Library> GetLibraries();
 
         ILibraryExport GetLibraryExport(string name, string aspect);
 
         ILibraryExport GetAllExports(string name, string aspect);
 
-        IEnumerable<ILibraryInformation> GetReferencingLibraries(string name, string aspect);
+        IEnumerable<Library> GetReferencingLibraries(string name, string aspect);
 
-        ILibraryInformation GetLibraryInformation(string name, string aspect);
+        Library GetLibraryInformation(string name, string aspect);
 
-        IEnumerable<ILibraryInformation> GetLibraries(string aspect);
+        IEnumerable<Library> GetLibraries(string aspect);
     }
 }

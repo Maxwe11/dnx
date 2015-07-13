@@ -35,7 +35,7 @@ namespace Microsoft.Framework.Runtime
             ILibraryManager manager,
             ILibraryExportProvider libraryExportProvider,
             ILibraryKey target,
-            Func<ILibraryInformation, bool> include)
+            Func<Library, bool> include)
         {
             var dependencyStopWatch = Stopwatch.StartNew();
             Logger.TraceInformation("[{0}]: Resolving references for '{1}' {2}", typeof(ProjectExportProviderHelper).Name, target.Name, target.Aspect);
@@ -132,7 +132,7 @@ namespace Microsoft.Framework.Runtime
 
         private class Node
         {
-            public ILibraryInformation Library { get; set; }
+            public Library Library { get; set; }
 
             public Node Parent { get; set; }
         }
