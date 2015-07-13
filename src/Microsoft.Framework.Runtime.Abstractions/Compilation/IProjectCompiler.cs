@@ -9,8 +9,7 @@ namespace Microsoft.Framework.Runtime.Compilation
     public interface IProjectCompiler
     {
         IMetadataProjectReference CompileProject(
-            ICompilationProject project,
-            ILibraryKey target,
+            CompilationProjectContext projectContext,
             Func<ILibraryExport> referenceResolver,
             Func<IList<ResourceDescriptor>> resourcesResolver);
     }

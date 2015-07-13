@@ -8,37 +8,19 @@ namespace Microsoft.Framework.Runtime
     /// </summary>
     internal static class LibraryKeyExtensions
     {
-        public static ILibraryKey ChangeName(this ILibraryKey target, string name)
+        public static LibraryKey ChangeName(this LibraryKey target, string name)
         {
-            return new LibraryKey
-            {
-                Name = name,
-                TargetFramework = target.TargetFramework,
-                Configuration = target.Configuration,
-                Aspect = target.Aspect,
-            };
+            return new LibraryKey(name, target.TargetFramework, target.Configuration, target.Aspect);
         }
 
-        public static ILibraryKey ChangeTargetFramework(this ILibraryKey target, FrameworkName targetFramework)
+        public static LibraryKey ChangeTargetFramework(this LibraryKey target, FrameworkName targetFramework)
         {
-            return new LibraryKey
-            {
-                Name = target.Name,
-                TargetFramework = targetFramework,
-                Configuration = target.Configuration,
-                Aspect = target.Aspect,
-            };
+            return new LibraryKey(target.Name, targetFramework, target.Configuration, target.Aspect);
         }
 
-        public static ILibraryKey ChangeAspect(this ILibraryKey target, string aspect)
+        public static LibraryKey ChangeAspect(this LibraryKey target, string aspect)
         {
-            return new LibraryKey
-            {
-                Name = target.Name,
-                TargetFramework = target.TargetFramework,
-                Configuration = target.Configuration,
-                Aspect = aspect,
-            };
+            return new LibraryKey(target.Name, target.TargetFramework, target.Configuration, aspect);
         }
     }
 }

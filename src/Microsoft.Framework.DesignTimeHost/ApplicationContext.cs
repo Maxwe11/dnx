@@ -1192,12 +1192,7 @@ namespace Microsoft.Framework.DesignTimeHost
                      _cache,
                      applicationHostContext.LibraryManager,
                      applicationHostContext.LibraryExportProvider,
-                     new LibraryKey
-                     {
-                         Configuration = configuration,
-                         TargetFramework = frameworkName,
-                         Name = project.Name
-                     },
+                     new LibraryKey(project.Name, frameworkName, configuration, aspect: null),
                      library => library.Type != "Project");
 
                 foreach (var reference in exportWithoutProjects.MetadataReferences)
@@ -1378,17 +1373,6 @@ namespace Microsoft.Framework.DesignTimeHost
             public string Name { get; set; }
 
             public string TargetFramework { get; set; }
-
-            public string Configuration { get; set; }
-
-            public string Aspect { get; set; }
-        }
-
-        private class LibraryKey : ILibraryKey
-        {
-            public string Name { get; set; }
-
-            public FrameworkName TargetFramework { get; set; }
 
             public string Configuration { get; set; }
 

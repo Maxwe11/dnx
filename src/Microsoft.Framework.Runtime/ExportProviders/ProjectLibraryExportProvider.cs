@@ -30,7 +30,7 @@ namespace Microsoft.Framework.Runtime
             });
         }
 
-        public ILibraryExport GetLibraryExport(ILibraryKey target)
+        public ILibraryExport GetLibraryExport(LibraryKey target)
         {
             Project project;
             // Can't find a project file with the name so bail
@@ -71,7 +71,7 @@ namespace Microsoft.Framework.Runtime
                     var assemblyPath = ResolvePath(project, target.Configuration, targetFrameworkInformation.AssemblyPath);
                     var pdbPath = ResolvePath(project, target.Configuration, targetFrameworkInformation.PdbPath);
 
-                    metadataReferences.Add(new CompiledProjectMetadataReference(project, assemblyPath, pdbPath));
+                    metadataReferences.Add(new CompiledProjectMetadataReference(project.ToCompilationContext(target), assemblyPath, pdbPath));
                 }
                 else
                 {
@@ -111,8 +111,7 @@ namespace Microsoft.Framework.Runtime
 
                     // Resolve the project export
                     IMetadataProjectReference projectReference = projectCompiler.CompileProject(
-                        project,
-                        target,
+                        project.ToCompilationContext(target),
                         () => projectExport.Value,
                         () => CompositeResourceProvider.Default.GetResources(project));
 

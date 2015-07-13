@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
@@ -14,7 +15,7 @@ using NuGet;
 
 namespace Microsoft.Framework.Runtime
 {
-    public class Project : ICompilationProject
+    public class Project
     {
         public const string ProjectFileName = "project.json";
 
@@ -68,10 +69,6 @@ namespace Microsoft.Framework.Runtime
         public bool EmbedInteropTypes { get; set; }
 
         public SemanticVersion Version { get; private set; }
-
-        // Temporary while old and new runtime are separate
-        string ICompilationProject.Version { get { return Version?.ToString(); } }
-        string ICompilationProject.AssemblyFileVersion { get { return AssemblyFileVersion?.ToString(); } }
 
         public Version AssemblyFileVersion { get; private set; }
 
@@ -322,6 +319,20 @@ namespace Microsoft.Framework.Runtime
                 isGacOrFrameworkReference: false);
 
             return project;
+        }
+
+        internal CompilationProjectContext ToCompilationContext(LibraryKey target)
+        {
+            Debug.Assert(string.Equals(target.Name, Name, StringComparison.Ordinal), "The provided target should be for the current project!");
+            return new CompilationProjectContext(
+                target,
+                ProjectDirectory,
+                ProjectFilePath,
+                Files,
+                Version.GetNormalizedVersionString(),
+                AssemblyFileVersion,
+                EmbedInteropTypes,
+                GetCompilerOptions(target.TargetFramework, target.Configuration));
         }
 
         private static SemanticVersion SpecifySnapshot(string version, string snapshotValue)

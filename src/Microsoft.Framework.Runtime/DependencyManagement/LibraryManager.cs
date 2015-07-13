@@ -115,13 +115,7 @@ namespace Microsoft.Framework.Runtime
 
         public ILibraryExport GetLibraryExport(string name, string aspect)
         {
-            return _libraryExportProvider.GetLibraryExport(new LibraryKey
-            {
-                Name = name,
-                TargetFramework = _targetFramework,
-                Configuration = _configuration,
-                Aspect = aspect,
-            });
+            return _libraryExportProvider.GetLibraryExport(new LibraryKey(name, _targetFramework, _configuration, aspect));
         }
 
         public ILibraryExport GetAllExports(string name, string aspect)
@@ -139,13 +133,7 @@ namespace Microsoft.Framework.Runtime
                     _cache,
                     this,
                     _libraryExportProvider,
-                    new LibraryKey
-                    {
-                        Name = name,
-                        TargetFramework = _targetFramework,
-                        Configuration = _configuration,
-                        Aspect = aspect,
-                    },
+                    new LibraryKey(name, _targetFramework, _configuration, aspect),
                     dependenciesOnly: false));
         }
 

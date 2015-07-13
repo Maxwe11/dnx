@@ -361,7 +361,7 @@ namespace Microsoft.Framework.Runtime
                                         .Select(path => new DefaultPackagePathResolver(path));
         }
 
-        public ILibraryExport GetLibraryExport(ILibraryKey target)
+        public ILibraryExport GetLibraryExport(LibraryKey target)
         {
             PackageDescription description;
             if (!_packageDescriptions.TryGetValue(target.Name, out description))

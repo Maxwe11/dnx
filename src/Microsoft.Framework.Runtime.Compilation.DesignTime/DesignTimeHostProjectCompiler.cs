@@ -26,16 +26,15 @@ namespace Microsoft.Framework.Runtime
         }
 
         public IMetadataProjectReference CompileProject(
-            ICompilationProject project,
-            ILibraryKey target,
+            CompilationProjectContext projectContext,
             Func<ILibraryExport> referenceResolver,
             Func<IList<ResourceDescriptor>> resourcesResolver)
         {
             // The target framework and configuration are assumed to be correct
             // in the design time process
-            var task = _compiler.Compile(project.ProjectDirectory, target);
+            var task = _compiler.Compile(projectContext.ProjectDirectory, projectContext.Target);
 
-            return new DesignTimeProjectReference(project, task.Result);
+            return new DesignTimeProjectReference(projectContext, task.Result);
         }
     }
 }

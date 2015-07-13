@@ -22,7 +22,7 @@ namespace Microsoft.Framework.Runtime.Roslyn
         {
             CompilationContext = compilationContext;
             MetadataReference = compilationContext.Compilation.ToMetadataReference(embedInteropTypes: compilationContext.Project.EmbedInteropTypes);
-            Name = compilationContext.Project.Name;
+            Name = compilationContext.Project.Target.Name;
         }
 
         public CompilationContext CompilationContext { get; private set; }

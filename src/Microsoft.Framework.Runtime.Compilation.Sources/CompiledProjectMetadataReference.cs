@@ -10,13 +10,13 @@ namespace Microsoft.Framework.Runtime.Compilation
 {
     internal class CompiledProjectMetadataReference : IMetadataProjectReference, IMetadataFileReference
     {
-        private readonly ICompilationProject _project;
+        private readonly CompilationProjectContext _project;
         private readonly string _assemblyPath;
         private readonly string _pdbPath;
 
-        public CompiledProjectMetadataReference(ICompilationProject project, string assemblyPath, string pdbPath)
+        public CompiledProjectMetadataReference(CompilationProjectContext project, string assemblyPath, string pdbPath)
         {
-            Name = project.Name;
+            Name = project.Target.Name;
             ProjectPath = project.ProjectFilePath;
             Path = assemblyPath;
 

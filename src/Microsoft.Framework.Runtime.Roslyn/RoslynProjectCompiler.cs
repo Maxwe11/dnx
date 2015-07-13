@@ -30,8 +30,7 @@ namespace Microsoft.Framework.Runtime.Roslyn
         }
 
         public IMetadataProjectReference CompileProject(
-            ICompilationProject project,
-            ILibraryKey target,
+            CompilationProjectContext projectContext,
             Func<ILibraryExport> referenceResolver,
             Func<IList<ResourceDescriptor>> resourcesResolver)
         {
@@ -45,8 +44,7 @@ namespace Microsoft.Framework.Runtime.Roslyn
             var incomingSourceReferences = export.SourceReferences;
 
             var compliationContext = _compiler.CompileProject(
-                project,
-                target,
+                projectContext,
                 incomingReferences,
                 incomingSourceReferences,
                 resourcesResolver);

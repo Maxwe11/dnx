@@ -16,7 +16,7 @@ namespace Microsoft.Framework.Runtime
             ICache cache,
             ILibraryManager manager,
             ILibraryExportProvider libraryExportProvider,
-            ILibraryKey target,
+            LibraryKey target,
             bool dependenciesOnly)
         {
             return GetExportsRecursive(cache, manager, libraryExportProvider, target, libraryInformation =>
@@ -34,7 +34,7 @@ namespace Microsoft.Framework.Runtime
             ICache cache,
             ILibraryManager manager,
             ILibraryExportProvider libraryExportProvider,
-            ILibraryKey target,
+            LibraryKey target,
             Func<Library, bool> include)
         {
             var dependencyStopWatch = Stopwatch.StartNew();

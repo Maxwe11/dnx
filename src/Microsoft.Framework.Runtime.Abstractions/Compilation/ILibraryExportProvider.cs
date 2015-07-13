@@ -7,6 +7,6 @@ namespace Microsoft.Framework.Runtime.Compilation
 {
     public interface ILibraryExportProvider
     {
-        ILibraryExport GetLibraryExport(ILibraryKey target);
+        ILibraryExport GetLibraryExport(LibraryKey target);
     }
 }

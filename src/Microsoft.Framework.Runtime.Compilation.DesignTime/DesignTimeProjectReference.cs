@@ -11,16 +11,16 @@ namespace Microsoft.Framework.Runtime
 {
     internal class DesignTimeProjectReference : IMetadataProjectReference
     {
-        private readonly ICompilationProject _project;
+        private readonly CompilationProjectContext _project;
         private readonly CompileResponse _response;
 
-        public DesignTimeProjectReference(ICompilationProject project, CompileResponse response)
+        public DesignTimeProjectReference(CompilationProjectContext project, CompileResponse response)
         {
             _project = project;
             _response = response;
         }
 
-        public string Name { get { return _project.Name; } }
+        public string Name { get { return _project.Target.Name; } }
 
         public string ProjectPath
         {

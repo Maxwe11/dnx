@@ -85,7 +85,7 @@ namespace Microsoft.Framework.Runtime
             }
         }
 
-        public ILibraryExport GetLibraryExport(ILibraryKey target)
+        public ILibraryExport GetLibraryExport(LibraryKey target)
         {
             // Did we even resolve this name, if not then do nothing
             if (!_resolvedPaths.ContainsKey(target.Name))

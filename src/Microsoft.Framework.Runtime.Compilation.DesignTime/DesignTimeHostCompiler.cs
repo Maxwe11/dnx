@@ -69,7 +69,7 @@ namespace Microsoft.Framework.Runtime
             }
         }
 
-        public async Task<CompileResponse> Compile(string projectPath, ILibraryKey library)
+        public async Task<CompileResponse> Compile(string projectPath, LibraryKey library)
         {
             var contexts = await _projectContexts.Task.ConfigureAwait(false);
 
