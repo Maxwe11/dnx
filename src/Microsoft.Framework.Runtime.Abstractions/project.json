@@ -6,12 +6,12 @@
         "dnx451": { },
         "dnxcore50": {
             "dependencies": {
-                "System.IO": "4.0.10-beta-*",
-                "System.Reflection": "4.0.10-beta-*",
-                "System.Runtime": "4.0.20-beta-*",
-                "System.Runtime.Extensions": "4.0.10-beta-*",
-                "System.Threading.Tasks": "4.0.10-beta-*",
-                "System.ComponentModel": "4.0.0-beta-*"
+                "System.IO": "4.0.10-*",
+                "System.Reflection": "4.0.10-*",
+                "System.Runtime": "4.0.20-*",
+                "System.Runtime.Extensions": "4.0.10-*",
+                "System.Threading.Tasks": "4.0.10-*",
+                "System.ComponentModel": "4.0.0-*"
             }
         }
     },
