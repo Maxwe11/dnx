@@ -6,8 +6,10 @@ using System;
 
 namespace Microsoft.Framework.Runtime.Compilation
 {
-    public interface IFileWatcher : IFileMonitor, IDisposable
+    public interface IFileWatcher : IDisposable
     {
+        event Action<string> OnChanged;
+
         void WatchDirectory(string path, string extension);
 
         bool WatchFile(string path);

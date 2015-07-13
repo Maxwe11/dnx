@@ -176,9 +176,6 @@ Please make sure the runtime matches a framework specified in {Project.ProjectFi
 
             _applicationHostContext.AddService(typeof(IApplicationShutdown), _shutdown);
             _applicationHostContext.AddService(typeof(IRuntimeOptions), options);
-
-            // TODO: Get rid of this and just use the IFileWatcher
-            _applicationHostContext.AddService(typeof(IFileMonitor), _watcher);
             _applicationHostContext.AddService(typeof(IFileWatcher), _watcher);
 
             if (options.CompilationServerPort.HasValue)

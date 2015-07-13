@@ -42,7 +42,7 @@ namespace Microsoft.Framework.Runtime.Tests
             Assert.Equal(expectedReferences, referencingLibraries.Select(y => y.Name).OrderBy(y => y));
         }
 
-        private static LibraryManager CreateManager(IEnumerable<ILibrary> libraryInfo = null)
+        private static LibraryManager CreateManager(IEnumerable<Library> libraryInfo = null)
         {
             var frameworkName = new FrameworkName("Net45", new Version(4, 5, 1));
             libraryInfo = libraryInfo ?? new[]
