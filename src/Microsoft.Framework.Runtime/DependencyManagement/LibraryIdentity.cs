@@ -6,7 +6,7 @@ using NuGet;
 
 namespace Microsoft.Framework.Runtime
 {
-    public class Library : IEquatable<Library>
+    public class LibraryIdentity : IEquatable<LibraryIdentity>
     {
         public string Name { get; set; }
 
@@ -16,11 +16,11 @@ namespace Microsoft.Framework.Runtime
 
         public override string ToString()
         {
-            var name = IsGacOrFrameworkReference ? "framework/" + Name : Name;
-            return name + " " + Version?.ToString();
+            // NOTE(anurse): We no longer need to put IsGacOrFrameworkReference into the string output because we rename framework dependencies.
+            return Name + " " + Version?.ToString();
         }
 
-        public bool Equals(Library other)
+        public bool Equals(LibraryIdentity other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -34,7 +34,7 @@ namespace Microsoft.Framework.Runtime
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
             if (obj.GetType() != this.GetType()) return false;
-            return Equals((Library)obj);
+            return Equals((LibraryIdentity)obj);
         }
 
         public override int GetHashCode()
@@ -47,17 +47,17 @@ namespace Microsoft.Framework.Runtime
             }
         }
 
-        public static bool operator ==(Library left, Library right)
+        public static bool operator ==(LibraryIdentity left, LibraryIdentity right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Library left, Library right)
+        public static bool operator !=(LibraryIdentity left, LibraryIdentity right)
         {
             return !Equals(left, right);
         }
 
-        public static implicit operator LibraryRange(Library library)
+        public static implicit operator LibraryRange(LibraryIdentity library)
         {
             return new LibraryRange(library.Name, library.IsGacOrFrameworkReference)
             {

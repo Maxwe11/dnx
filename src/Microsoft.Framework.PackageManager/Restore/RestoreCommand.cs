@@ -996,9 +996,9 @@ namespace Microsoft.Framework.PackageManager
             return Task.WhenAll(tasks);
         }
 
-        class LibraryComparer : IComparer<Library>
+        class LibraryComparer : IComparer<LibraryIdentity>
         {
-            public int Compare(Library x, Library y)
+            public int Compare(LibraryIdentity x, LibraryIdentity y)
             {
                 int compare = string.Compare(x.Name, y.Name);
                 if (compare == 0)
@@ -1028,7 +1028,7 @@ namespace Microsoft.Framework.PackageManager
         {
             public RestoreContext RestoreContext { get; set; }
 
-            public HashSet<Library> Libraries { get; set; } = new HashSet<Library>();
+            public HashSet<LibraryIdentity> Libraries { get; set; } = new HashSet<LibraryIdentity>();
 
             public GraphNode Root { get; set; }
         }

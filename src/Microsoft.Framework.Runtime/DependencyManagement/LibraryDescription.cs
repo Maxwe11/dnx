@@ -9,7 +9,7 @@ namespace Microsoft.Framework.Runtime
     public class LibraryDescription
     {
         public LibraryRange LibraryRange { get; set; }
-        public Library Identity { get; set; }
+        public LibraryIdentity Identity { get; set; }
         public IEnumerable<LibraryDependency> Dependencies { get; set; }
 
         public bool Resolved { get; set; } = true;

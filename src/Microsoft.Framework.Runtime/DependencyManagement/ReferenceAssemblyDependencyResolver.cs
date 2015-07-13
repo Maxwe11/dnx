@@ -62,7 +62,7 @@ namespace Microsoft.Framework.Runtime
                 return new LibraryDescription
                 {
                     LibraryRange = libraryRange,
-                    Identity = new Library
+                    Identity = new LibraryIdentity
                     {
                         Name = libraryRange.Name,
                         Version = new SemanticVersion(assemblyVersion),

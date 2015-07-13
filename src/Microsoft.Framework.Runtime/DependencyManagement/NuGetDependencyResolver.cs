@@ -130,7 +130,7 @@ namespace Microsoft.Framework.Runtime
                 return new LibraryDescription
                 {
                     LibraryRange = libraryRange,
-                    Identity = new Library
+                    Identity = new LibraryIdentity
                     {
                         Name = package.Id,
                         Version = package.Version
