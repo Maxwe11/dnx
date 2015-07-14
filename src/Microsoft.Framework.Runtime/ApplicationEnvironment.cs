@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Versioning;
 using System.Text;
+using Microsoft.Framework.Runtime.Sources.Impl;
 
 namespace Microsoft.Framework.Runtime
 {
@@ -13,12 +14,15 @@ namespace Microsoft.Framework.Runtime
     {
         private readonly Project _project;
         private readonly FrameworkName _targetFramework;
+        private readonly ApplicationGlobalData _globalData;
 
         public ApplicationEnvironment(Project project, FrameworkName targetFramework, string configuration)
         {
             _project = project;
             _targetFramework = targetFramework;
             Configuration = configuration;
+
+            _globalData = new ApplicationGlobalData();
         }
 
         public string ApplicationName
@@ -50,40 +54,14 @@ namespace Microsoft.Framework.Runtime
             get { return _targetFramework; }
         }
 
-#if DNX451
         public object GetData(string name)
         {
-            return AppDomain.CurrentDomain.GetData(name);
+            return _globalData.GetData(name);
         }
 
         public void SetData(string name, object value)
         {
-            AppDomain.CurrentDomain.SetData(name, value);
+            _globalData.SetData(name, value);
         }
-#else
-        // NOTE(anurse): ConcurrentDictionary seems overkill here. This data is rarely used, and a global lock seems safer.
-        private object _lock = new object();
-        private Dictionary<string, object> _appGlobalData = new Dictionary<string, object>();
-        public object GetData(string name)
-        {
-            lock (_lock)
-            {
-                object val;
-                if (_appGlobalData.TryGetValue(name, out val))
-                {
-                    return val;
-                }
-                return null;
-            }
-        }
-
-        public void SetData(string name, object value)
-        {
-            lock (_lock)
-            {
-                _appGlobalData[name] = value;
-            }
-        }
-#endif
     }
 }
